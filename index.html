@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio PASEC — Alisson Robles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --gold: #f5c518;
+    --cream: #faf8f2;
+    --warm: #f0ebe0;
+    --text: #1a1a2e;
+    --muted: #6b6b8a;
+    --accent: #c8a951;
+    --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 60px;
+    background: rgba(13,27,62,0.92); backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(245,197,24,0.12);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { height: 38px; border-radius: 6px; }
+  .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 25% 60%, rgba(245,197,24,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 15%, rgba(200,169,81,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 100px 55px 80px 80px; position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.28);
+    border-radius: 30px; padding: 8px 18px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 36px; width: fit-content;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; display:inline-block; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    line-height: 1.07; color: var(--white); margin-bottom: 12px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-subtitle { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-bottom: 50px; letter-spacing: 0.5px; animation: fadeUp 0.8s 0.2s ease both; }
+  .hero-info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; animation: fadeUp 0.8s 0.3s ease both; }
+  .info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px 18px; }
+  .info-card .label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+  .info-card .value { font-size: 13px; color: rgba(255,255,255,0.82); font-weight: 500; }
+  .cross-deco { position: absolute; top: 30px; left: 80px; font-size: 44px; color: rgba(245,197,24,0.12); }
+  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-right::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, var(--navy) 0%, transparent 35%); z-index: 1; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.75; animation: scaleIn 1.2s ease both; }
+  .hero-hours { position: absolute; bottom: 40px; right: 40px; z-index: 2; text-align: right; animation: fadeUp 1s 0.6s ease both; }
+  .hero-hours .num { font-family: 'Playfair Display', serif; font-size: 5.5rem; line-height: 1; color: var(--gold); opacity: 0.9; }
+  .hero-hours .unit { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+
+  /* SECTIONS */
+  section { padding: 100px 80px; }
+  .section-label { display: inline-flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); line-height: 1.15; color: var(--navy); margin-bottom: 22px; }
+  p.lead { font-size: 1.05rem; line-height: 1.82; color: var(--muted); max-width: 680px; }
+
+  /* INTRO */
+  .intro { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .intro-img-wrap { position: relative; }
+  .intro-img-wrap img { width: 100%; border-radius: 16px; object-fit: cover; height: 520px; display: block; }
+  .intro-img-wrap::after {
+    content: ''; position: absolute; bottom: -18px; left: -18px; width: 55%; height: 55%;
+    border: 2px solid var(--gold); border-radius: 10px; z-index: -1;
+  }
+  .quote-block { border-left: 3px solid var(--gold); padding-left: 22px; margin: 28px 0; }
+  .quote-block blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; line-height: 1.6; color: var(--navy); }
+
+  /* FUNDACIÓN */
+  .fundacion { background: var(--navy); color: var(--white); position: relative; overflow: hidden; }
+  .fundacion::before { content: ''; position: absolute; top: -100px; right: -100px; width: 380px; height: 380px; border: 1px solid rgba(245,197,24,0.09); border-radius: 50%; }
+  .fundacion::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 230px; height: 230px; border: 1px solid rgba(245,197,24,0.07); border-radius: 50%; }
+  .fundacion h2 { color: var(--white); }
+  .fundacion .lead { color: rgba(255,255,255,0.62); max-width: none; }
+  .fun-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 55px; }
+  .fun-img { width: 100%; border-radius: 14px; object-fit: cover; height: 360px; display: block; border: 1px solid rgba(245,197,24,0.18); }
+  .fun-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+  .stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 22px; position: relative; }
+  .stat::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); border-radius: 10px 0 0 10px; }
+  .stat .n { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .stat .desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.45; }
+
+  /* ACTIVIDADES */
+  .actividades { background: var(--warm); }
+  .acts-intro { margin-bottom: 55px; }
+  .acts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .act-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 28px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .act-card:hover { transform: translateY(-6px); box-shadow: 0 14px 45px rgba(0,0,0,0.11); }
+  .act-card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+  .act-body { padding: 22px; }
+  .act-body h3 { font-family: 'Playfair Display', serif; font-size: 1.18rem; color: var(--navy); margin-bottom: 10px; }
+  .act-body p { font-size: 13.5px; line-height: 1.72; color: var(--muted); }
+  .act-tag { display: inline-block; background: rgba(245,197,24,0.12); color: var(--accent); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 11px; border-radius: 20px; margin-bottom: 10px; }
+
+  /* PROYECTO */
+  .proyecto { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .proyecto-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .proyecto-imgs img { width: 100%; border-radius: 10px; object-fit: cover; display: block; }
+  .proyecto-imgs img:first-child { grid-column: 1 / -1; height: 260px; }
+  .proyecto-imgs img:not(:first-child) { height: 150px; }
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 22px 24px; margin: 26px 0; }
+  .highlight-box p { color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.72; }
+  .highlight-box strong { color: var(--gold); }
+
+  /* REFLEXIÓN */
+  .reflexion { background: var(--navy); text-align: center; position: relative; overflow: hidden; padding: 110px 80px; }
+  .reflexion::before { content: '\201C'; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); font-family: 'Playfair Display', serif; font-size: 320px; color: rgba(245,197,24,0.03); line-height: 1; pointer-events: none; }
+  .reflexion h2 { color: var(--white); }
+  .reflexion-body { max-width: 780px; margin: 0 auto; }
+  .reflexion p { font-size: 1rem; line-height: 1.88; color: rgba(255,255,255,0.68); margin-bottom: 18px; }
+  .reflexion p strong { color: var(--gold); }
+  .refl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 55px; }
+  .refl-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(245,197,24,0.14); border-radius: 14px; padding: 28px 22px; text-align: left; }
+  .refl-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .refl-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--white); margin-bottom: 10px; }
+  .refl-card p { font-size: 13px; color: rgba(255,255,255,0.52); line-height: 1.65; margin: 0; }
+
+  /* FOOTER */
+  footer { background: #07101f; padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(245,197,24,0.1); }
+  .foot-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 6px; }
+  .foot-sub { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; line-height: 1.6; }
+  .foot-right { display: flex; gap: 18px; align-items: center; }
+  .foot-right img { height: 46px; border-radius: 8px; }
+  .usfq-label { font-size: 11px; color: rgba(255,255,255,0.3); text-align: right; line-height: 1.5; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(1.06); } to { opacity: 0.75; transform: scale(1); } }
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 280px; }
+    .hero-left { padding: 90px 22px 50px; }
+    .hero-info { grid-template-columns: 1fr; }
+    section { padding: 60px 22px; }
+    .intro, .proyecto { grid-template-columns: 1fr; gap: 40px; }
+    .fun-grid { grid-template-columns: 1fr; gap: 36px; }
+    .acts-grid { grid-template-columns: 1fr; }
+    .refl-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 22px; text-align: center; }
+    .foot-right { justify-content: center; }
+    .proyecto-imgs img:first-child { height: 200px; }
+    .hero-hours .num { font-size: 3.8rem; }
+    .reflexion { padding: 80px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="img/logo.png" alt="La Pastoral">
+    <span>Portafolio PASEC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#intro">Inicio</a></li>
+    <li><a href="#fundacion">La Fundación</a></li>
+    <li><a href="#actividades">Actividades</a></li>
+    <li><a href="#proyecto">Proyecto Final</a></li>
+    <li><a href="#reflexion">Reflexión</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="cross-deco">✝</div>
+    <div class="hero-tag"><span></span>Aprendizaje y Servicio &middot; PASEC &middot; NRC 1486</div>
+    <h1>Servir es<br><em>aprender</em><br>desde el alma.</h1>
+    <p class="hero-subtitle">Alisson Robles &middot; Código 00335727 &middot; USFQ &middot; Pastoral de Cumbayá</p>
+    <div class="hero-info">
+      <div class="info-card">
+        <div class="label">Profesora</div>
+        <div class="value">Johanna Monar Coloma</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Fundación</div>
+        <div class="value">Pastoral Social de Cumbayá</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Población atendida</div>
+        <div class="value">Adultos Mayores</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Frecuencia</div>
+        <div class="value">Cada 14 días &middot; Sábados</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="img/alisson1.png" alt="Alisson Robles">
+    <div class="hero-hours">
+      <div class="num">85</div>
+      <div class="unit">Horas de Servicio</div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <div class="intro-img-wrap reveal">
+    <img src="img/alisson2.png" alt="Alisson con adultos mayores">
+  </div>
+  <div class="reveal" style="transition-delay:0.15s">
+    <div class="section-label">Quién soy</div>
+    <h2>Una experiencia que<br>cambió mi perspectiva.</h2>
+    <div class="quote-block">
+      <blockquote>"El servicio no es un requisito; es un encuentro con lo más humano que existe."</blockquote>
+    </div>
+    <p class="lead">Soy Alisson Robles, estudiante de la Universidad San Francisco de Quito. Durante este semestre tuve el privilegio de ser parte de la clase de Aprendizaje y Servicio PASEC, una experiencia que me llevó mucho más allá de las aulas. Cada dos sábados me dirigí a la <strong>Fundación Pastoral Social de Cumbayá</strong>, donde compartí tiempo, actividades y momentos de genuina conexión humana con los adultos mayores que asisten a esa comunidad.</p>
+    <p class="lead" style="margin-top:16px;">Lo que comenzó como un compromiso académico se convirtió en algo que llevo en el corazón: la certeza de que dar sin esperar nada a cambio es uno de los actos más transformadores que existen.</p>
+  </div>
+</section>
+
+<!-- FUNDACIÓN -->
+<section class="fundacion" id="fundacion">
+  <div class="section-label" style="color:var(--gold)">La fundación</div>
+  <h2>Pastoral Social de Cumbayá</h2>
+  <p class="lead">Una comunidad de fe y servicio en el corazón de Cumbayá, Ecuador, que abre sus puertas cada quince días para recibir a los adultos mayores de la zona, brindarles atención, actividades, compañía y víveres para su hogar.</p>
+  <div class="fun-grid reveal">
+    <div>
+      <img class="fun-img" src="img/iglesia.png" alt="Iglesia Pastoral de Cumbayá">
+      <div class="fun-stats">
+        <div class="stat"><div class="n">85</div><div class="desc">Horas de servicio completadas en el semestre</div></div>
+        <div class="stat"><div class="n">2</div><div class="desc">Grupos atendidos: adultos mayores y niños</div></div>
+        <div class="stat"><div class="n">14</div><div class="desc">Días entre cada jornada de servicio</div></div>
+        <div class="stat"><div class="n">100%</div><div class="desc">Voluntariedad y consentimiento en cada actividad</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px;">
+      <p style="color:rgba(255,255,255,0.7);line-height:1.82;font-size:1rem;">La Pastoral de Cumbayá funciona en torno a la iglesia local, y su programa para adultos mayores es un modelo de dignidad y cuidado comunitario. Cada persona que asiste lleva colgada al cuello una <strong style="color:var(--gold)">tarjeta de identificación personal</strong> que también le permite acceder a su propia <strong style="color:var(--gold)">mochila andadora</strong> numerada.</p>
+      <p style="color:rgba(255,255,255,0.7);line-height:1.82;font-size:1rem;">En esas mochilas, los adultos mayores reciben <strong style="color:var(--gold)">víveres donados</strong> por los estudiantes y la fundación, una contribución que llega directamente a sus hogares. Además, en cada jornada se les ofrecía un <strong style="color:var(--gold)">refrigerio</strong>, un gesto lleno de calidez y significado.</p>
+      <p style="color:rgba(255,255,255,0.7);line-height:1.82;font-size:1rem;">Yo siempre trabajé con el <strong style="color:var(--gold)">grupo de adultos mayores</strong>. Esa constancia me permitió construir vínculos reales, recordar sus historias, sus nombres, sus sonrisas. Fue un semestre de presencia auténtica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVIDADES -->
+<section class="actividades" id="actividades">
+  <div class="acts-intro reveal">
+    <div class="section-label">Lo que hicimos juntos</div>
+    <h2>Actividades que conectaron<br>corazones y manos.</h2>
+    <p class="lead">Cada sesión era diferente, pero todas tenían algo en común: el enfoque en la creatividad, la alegría y el bienestar de los adultos mayores. Desde juegos hasta manualidades elaboradas, cada actividad fue diseñada con cariño y propósito.</p>
+  </div>
+  <div class="acts-grid">
+    <div class="act-card reveal" style="transition-delay:0s">
+      <img src="img/donaciones.png" alt="Preparando donaciones">
+      <div class="act-body">
+        <span class="act-tag">Donaciones</span>
+        <h3>Preparación de Mochilas y Víveres</h3>
+        <p>Antes de cada sesión, organizábamos las mochilas andadoras con víveres para cada adulto mayor. Cada mochila correspondía a una tarjeta identificadora, haciendo el proceso personalizado. Ver esos carritos cargados de amor ir a manos de quienes los necesitaban era uno de los momentos más emotivos de cada jornada.</p>
+      </div>
+    </div>
+    <div class="act-card reveal" style="transition-delay:0.1s">
+      <img src="img/cajas.png" alt="Pintar cajas de cartón">
+      <div class="act-body">
+        <span class="act-tag">Manualidades</span>
+        <h3>Pintar Cajas y Creatividad con Cartón</h3>
+        <p>El 18 de abril de 2026, los adultos mayores pintaron y decoraron cajas de cartón en una actividad que estimuló su motricidad fina y expresión artística. Fue fascinante ver cómo cada persona le ponía su sello único a su creación. Algunos escribían sus nombres con orgullo, otros exploraban los colores con libertad total.</p>
+      </div>
+    </div>
+    <div class="act-card reveal" style="transition-delay:0.2s">
+      <img src="img/mascaras_hacer.png" alt="Elaborando máscaras">
+      <div class="act-body">
+        <span class="act-tag">Arte</span>
+        <h3>Elaboración de Máscaras Coloridas</h3>
+        <p>Una de las actividades más celebradas fue la creación de máscaras decorativas con papel de colores, pegamento y figuras de tela. Cada adulto mayor terminó con una máscara completamente única, y al final las sostuvieron frente a sus rostros mientras la sala estallaba en risas y complicidad.</p>
+      </div>
+    </div>
+    <div class="act-card reveal" style="transition-delay:0.3s">
+      <img src="img/mascaras_show.png" alt="Mostrando las máscaras">
+      <div class="act-body">
+        <span class="act-tag">Exposición</span>
+        <h3>Exhibición de Creaciones Artísticas</h3>
+        <p>Al final de la sesión de máscaras, los participantes posaron orgullosos con sus obras frente al rostro. Ese instante de celebración colectiva, donde cada persona mostraba lo que había creado con sus propias manos, fue un recordatorio de que la creatividad no tiene edad.</p>
+      </div>
+    </div>
+    <div class="act-card reveal" style="transition-delay:0.4s">
+      <img src="img/bingo.png" alt="Juego de bingo con botones">
+      <div class="act-body">
+        <span class="act-tag">Juegos</span>
+        <h3>Bingo con Botones</h3>
+        <p>El bingo fue una de las actividades más dinámicas y participativas. En lugar de fichas convencionales, usamos botones de distintos colores y tamaños para marcar los cartones. El ambiente era de concentración total, risas y competencia amistosa, ejercitando la memoria y fomentando la socialización.</p>
+      </div>
+    </div>
+    <div class="act-card reveal" style="transition-delay:0.5s">
+      <img src="img/alisson1.png" alt="Alisson en la USFQ">
+      <div class="act-body">
+        <span class="act-tag">Comunidad</span>
+        <h3>El Refrigerio: Un Momento de Comunidad</h3>
+        <p>En cada jornada, sin excepción, compartíamos un refrigerio con los adultos mayores. Ese momento alrededor de la mesa era quizás el más humano de todos. Las conversaciones fluían, las barreras desaparecían. Para mí, esos minutos valían tanto como toda la actividad planificada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTO FINAL -->
+<section class="proyecto" id="proyecto">
+  <div class="reveal">
+    <div class="section-label">Proyecto Final</div>
+    <h2>Un día en la<br>Universidad San Francisco.</h2>
+    <p class="lead">El proyecto final del semestre fue, sin duda, el más significativo de todos: llevamos a los adultos mayores de la Pastoral en buses hasta el campus de la Universidad San Francisco de Quito para que vivieran una tarde de cine.</p>
+    <div class="highlight-box">
+      <p><strong>Voluntariedad total:</strong> la actividad fue completamente opcional. Cada adulto mayor otorgó su consentimiento, y quienes no quisieron participar simplemente no fueron. Nadie fue presionado ni condicionado. Esa premisa fue fundamental para todos nosotros como equipo.</p>
+    </div>
+    <p class="lead">Para muchos de ellos, fue la primera vez que visitaban una universidad. Caminar por el campus, ver los edificios y el ambiente estudiantil les generó algo muy especial. Sentarse juntos a ver una película fue el broche perfecto para un semestre lleno de encuentros genuinos.</p>
+    <p class="lead" style="margin-top:14px;">Organizar la logística, coordinar los buses y asegurarnos de que todos estuvieran cómodos y seguros fue también parte del aprendizaje: el servicio requiere planificación, responsabilidad y trabajo en equipo.</p>
+  </div>
+  <div class="proyecto-imgs reveal" style="transition-delay:0.15s">
+    <img src="img/evento.png" alt="Evento en la USFQ">
+    <img src="img/alisson2.png" alt="Alisson con adultos mayores">
+    <img src="img/cajas.png" alt="Actividades en la fundación">
+  </div>
+</section>
+
+<!-- REFLEXIÓN -->
+<section class="reflexion" id="reflexion">
+  <div class="reflexion-body">
+    <div class="section-label" style="color:var(--gold);justify-content:center;margin:0 auto 18px">Reflexión Final</div>
+    <h2 style="margin-bottom:40px;color:var(--white)">Lo que 85 horas me<br>enseñaron sobre la vida.</h2>
+    <p>Este semestre de servicio me hizo entender que la <strong>vulnerabilidad compartida</strong> es la base de toda conexión humana verdadera. Cada sábado que llegué a la Pastoral, llegué con mis propios miedos, cansancios y dudas, y los adultos mayores me recibieron con una calidez que no pedí pero que necesitaba.</p>
+    <p>Aprendí que el tiempo es el regalo más valioso. No los víveres, no las actividades perfectamente planificadas, sino <strong>estar presente</strong>. Mirar a alguien a los ojos, recordar su nombre, preguntarle cómo está de verdad. Eso transforma a quien da y a quien recibe.</p>
+    <p>También me enseñó sobre <strong>respeto a la autonomía</strong>. En el proyecto final, nadie fue obligado. Esa decisión fue de las más importantes que tomamos como equipo, porque el servicio sin dignidad no es servicio. La libertad de decir no es tan importante como la oportunidad de decir sí.</p>
+    <p>Hoy termino este semestre siendo una versión diferente de quien empecé. Más empática, más presente, más consciente del privilegio que es estudiar en una universidad mientras otros luchan por sus necesidades básicas. Esa conciencia no me paraliza; me compromete. <strong>Y ese compromiso es exactamente lo que la PASEC quiere dejar en cada uno de nosotros.</strong></p>
+    <div class="refl-grid reveal">
+      <div class="refl-card">
+        <div class="icon">🤲</div>
+        <h4>Empatía Profunda</h4>
+        <p>Entendí que ponerse en el lugar del otro no es un ejercicio intelectual, sino una práctica cotidiana que se cultiva con presencia genuina y escucha activa.</p>
+      </div>
+      <div class="refl-card">
+        <div class="icon">🌱</div>
+        <h4>Crecimiento Personal</h4>
+        <p>Cada sesión me desafió a salir de mi zona de confort, a improvisar, a encontrar significado en los momentos pequeños y a crecer como persona.</p>
+      </div>
+      <div class="refl-card">
+        <div class="icon">✨</div>
+        <h4>Responsabilidad Social</h4>
+        <p>El conocimiento académico adquiere otro sentido cuando se pone al servicio de la comunidad. Eso es exactamente lo que PASEC me regaló este semestre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-name">Alisson Robles &middot; 00335727</div>
+    <div class="foot-sub">PASEC &middot; NRC 1486 &middot; Prof. Johanna Monar Coloma</div>
+    <div class="foot-sub">Universidad San Francisco de Quito &middot; 2026</div>
+  </div>
+  <div class="foot-right">
+    <div class="usfq-label">Fundación Pastoral<br>Social de Cumbayá</div>
+    <img src="img/logo.png" alt="Logo La Pastoral">
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
