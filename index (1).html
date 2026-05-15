@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Portafolio PASEC — Alisson Robles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0d1b3e; --gold:#f5c518; --cream:#faf8f2; --warm:#f0ebe0; --text:#1a1a2e; --muted:#6b6b8a; --accent:#c8a951; --white:#ffffff; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 60px;background:rgba(13,27,62,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(245,197,24,0.12);}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo img{height:36px;border-radius:6px;}
+  .nav-logo span{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--white);}
+  .nav-links{display:flex;gap:22px;list-style:none;}
+  .nav-links a{text-decoration:none;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.55);transition:color .2s;}
+  .nav-links a:hover{color:var(--gold);}
+
+  .hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(245,197,24,.07) 0%,transparent 55%),radial-gradient(ellipse at 80% 15%,rgba(200,169,81,.05) 0%,transparent 50%);pointer-events:none;}
+  .hero-left{display:flex;flex-direction:column;justify-content:center;padding:100px 55px 80px 80px;position:relative;z-index:2;}
+  .hero-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.28);border-radius:30px;padding:8px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:36px;width:fit-content;animation:fadeUp .8s ease both;}
+  .hero-tag span{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,4.2rem);line-height:1.07;color:var(--white);margin-bottom:12px;animation:fadeUp .8s .1s ease both;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero-subtitle{font-size:.9rem;color:rgba(255,255,255,.45);margin-bottom:50px;letter-spacing:.5px;animation:fadeUp .8s .2s ease both;}
+  .hero-info{display:grid;grid-template-columns:1fr 1fr;gap:16px;animation:fadeUp .8s .3s ease both;}
+  .info-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px 18px;}
+  .info-card .label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+  .info-card .value{font-size:13px;color:rgba(255,255,255,.82);font-weight:500;}
+  .cross-deco{position:absolute;top:30px;left:80px;font-size:44px;color:rgba(245,197,24,.12);}
+  .hero-right{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,var(--navy) 0%,transparent 35%);z-index:1;}
+  .hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.75;animation:scaleIn 1.2s ease both;}
+  .hero-hours{position:absolute;bottom:40px;right:40px;z-index:2;text-align:right;animation:fadeUp 1s .6s ease both;}
+  .hero-hours .num{font-family:'Playfair Display',serif;font-size:5.5rem;line-height:1;color:var(--gold);opacity:.9;}
+  .hero-hours .unit{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.45);}
+
+  section{padding:100px 80px;}
+  .section-label{display:inline-flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+  .section-label::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);line-height:1.15;color:var(--navy);margin-bottom:22px;}
+  p.lead{font-size:1.05rem;line-height:1.82;color:var(--muted);max-width:680px;}
+
+  /* INTRO */
+  .intro{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .intro-img-wrap{position:relative;}
+  .intro-img-wrap img{width:100%;border-radius:16px;object-fit:cover;height:520px;display:block;}
+  .intro-img-wrap::after{content:'';position:absolute;bottom:-18px;left:-18px;width:55%;height:55%;border:2px solid var(--gold);border-radius:10px;z-index:-1;}
+  .quote-block{border-left:3px solid var(--gold);padding-left:22px;margin:28px 0;}
+  .quote-block blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;line-height:1.6;color:var(--navy);}
+
+  /* FUNDACIÓN */
+  .fundacion{background:var(--navy);color:var(--white);position:relative;overflow:hidden;}
+  .fundacion::before{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;border:1px solid rgba(245,197,24,.09);border-radius:50%;}
+  .fundacion::after{content:'';position:absolute;bottom:-60px;left:-60px;width:230px;height:230px;border:1px solid rgba(245,197,24,.07);border-radius:50%;}
+  .fundacion h2{color:var(--white);}
+  .fundacion .lead{color:rgba(255,255,255,.62);max-width:none;}
+  .fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:55px;}
+  .fun-img{width:100%;border-radius:14px;object-fit:cover;height:360px;display:block;border:1px solid rgba(245,197,24,.18);}
+  .fun-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+  .stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:22px;position:relative;}
+  .stat::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);border-radius:10px 0 0 10px;}
+  .stat .n{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);line-height:1;margin-bottom:6px;}
+  .stat .desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.45;}
+
+  /* ACTIVIDADES */
+  .actividades{background:var(--warm);}
+  .acts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:0;}
+  .acts-intro{margin-bottom:55px;}
+  .act-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;}
+  .act-card:hover{transform:translateY(-6px);box-shadow:0 14px 45px rgba(0,0,0,.11);}
+  .act-card img{width:100%;height:210px;object-fit:cover;display:block;}
+  .act-body{padding:22px;}
+  .act-body h3{font-family:'Playfair Display',serif;font-size:1.18rem;color:var(--navy);margin-bottom:10px;}
+  .act-body p{font-size:13.5px;line-height:1.72;color:var(--muted);}
+  .act-tag{display:inline-block;background:rgba(245,197,24,.12);color:var(--accent);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:10px;}
+
+  /* PROYECTO */
+  .proyecto{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .proyecto-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .proyecto-imgs img{width:100%;border-radius:10px;object-fit:cover;display:block;}
+  .proyecto-imgs img:first-child{grid-column:1/-1;height:260px;}
+  .proyecto-imgs img:not(:first-child){height:150px;}
+  .highlight-box{background:var(--navy);border-radius:12px;padding:22px 24px;margin:26px 0;}
+  .highlight-box p{color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.72;}
+  .highlight-box strong{color:var(--gold);}
+
+  /* REFLEXIÓN */
+  .reflexion{background:var(--navy);text-align:center;position:relative;overflow:hidden;padding:110px 80px;}
+  .reflexion::before{content:'\201C';position:absolute;top:-60px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:320px;color:rgba(245,197,24,.03);line-height:1;pointer-events:none;}
+  .reflexion h2,.reflexion-body p strong{color:var(--white);}
+  .reflexion-body{max-width:780px;margin:0 auto;}
+  .reflexion-body p{font-size:1rem;line-height:1.88;color:rgba(255,255,255,.68);margin-bottom:18px;}
+  .reflexion-body p strong{color:var(--gold);}
+  .refl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:55px;}
+  .refl-card{background:rgba(255,255,255,.04);border:1px solid rgba(245,197,24,.14);border-radius:14px;padding:28px 22px;text-align:left;}
+  .refl-card .icon{font-size:1.8rem;margin-bottom:12px;}
+  .refl-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);margin-bottom:10px;}
+  .refl-card p{font-size:13px;color:rgba(255,255,255,.52);line-height:1.65;margin:0;}
+
+  .section-divider{height:4px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.18;}
+
+  /* S1 PRODUCTO */
+  .s1{background:var(--cream);}
+  .s1-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;margin-top:50px;}
+  .s1-product-box{background:var(--white);border-radius:16px;padding:36px;box-shadow:0 6px 40px rgba(0,0,0,.07);border-top:4px solid var(--gold);}
+  .s1-product-box h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--navy);margin-bottom:18px;}
+  .s1-product-box p{font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:14px;}
+  .s1-product-box p:last-child{margin-bottom:0;}
+  .s1-questions{display:flex;flex-direction:column;gap:24px;}
+  .s1-q{background:var(--warm);border-radius:12px;padding:24px;}
+  .s1-q .q-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .s1-q .q-label::before{content:'';display:block;width:20px;height:1px;background:var(--accent);}
+  .s1-q p{font-size:14px;line-height:1.78;color:var(--text);}
+
+  /* S2 CIUDADANÍA */
+  .s2{background:var(--navy);color:var(--white);}
+  .s2 h2{color:var(--white);}
+  .s2-def-box{background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.25);border-radius:16px;padding:36px;margin:40px 0;}
+  .s2-def-box .def-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+  .s2-def-box blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;line-height:1.65;color:var(--white);}
+  .s2-compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:50px;}
+  .s2-col{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:30px;}
+  .s2-col .col-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .s2-col .col-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold);line-height:1;}
+  .s2-col .col-title{font-size:13px;color:rgba(255,255,255,.6);line-height:1.4;}
+  .s2-col p{font-size:13.5px;line-height:1.78;color:rgba(255,255,255,.65);margin-bottom:12px;}
+  .s2-col p:last-child{margin-bottom:0;}
+  .s2-compare-text{margin-top:40px;}
+  .s2-compare-text h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:20px;}
+  .s2-compare-text p{font-size:14px;line-height:1.82;color:rgba(255,255,255,.65);margin-bottom:14px;}
+  .s2-compare-text p strong{color:var(--gold);}
+
+  /* S3 VALORES */
+  .s3{background:var(--warm);}
+  .s3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:50px;}
+  .valor-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.06);}
+  .valor-header{background:var(--navy);padding:28px 26px;}
+  .valor-num{font-family:'Playfair Display',serif;font-size:3rem;color:rgba(245,197,24,.2);line-height:1;margin-bottom:8px;}
+  .valor-header h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);}
+  .valor-body{padding:26px;display:flex;flex-direction:column;gap:18px;}
+  .valor-item .vi-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+  .valor-item p{font-size:13.5px;line-height:1.72;color:var(--muted);}
+
+  /* S4 COMPROMISOS */
+  .s4{background:var(--cream);}
+  .s4-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px;}
+  .compromiso-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.07);}
+  .comp-header{padding:28px 30px;}
+  .comp-header.est{background:var(--navy);}
+  .comp-header.pro{background:#1a3a6b;}
+  .comp-role{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .comp-header h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);line-height:1.35;}
+  .comp-body{padding:28px 30px;display:flex;flex-direction:column;gap:22px;}
+  .comp-stitle{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .comp-stitle::before{content:'';display:block;width:18px;height:1px;background:var(--accent);}
+  .comp-body p{font-size:13.5px;line-height:1.75;color:var(--muted);}
+  .acc-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+  .acc-list li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.65;color:var(--muted);}
+  .acc-list li::before{content:'→';color:var(--gold);font-weight:bold;flex-shrink:0;margin-top:1px;}
+
+  /* S5 REFERENCIAS */
+  .s5{background:var(--navy);}
+  .s5 h2{color:var(--white);}
+  .ref-list{margin-top:40px;display:flex;flex-direction:column;gap:18px;}
+  .ref-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px 24px;border-left:3px solid var(--gold);}
+  .ref-item p{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,.65);}
+  .ref-item a{color:var(--gold);text-decoration:none;}
+  .ref-item a:hover{text-decoration:underline;}
+
+  footer{background:#07101f;padding:48px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(245,197,24,.1);}
+  .foot-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:6px;}
+  .foot-sub{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.5px;line-height:1.6;}
+  .foot-right{display:flex;gap:18px;align-items:center;}
+  .foot-right img{height:46px;border-radius:8px;}
+  .usfq-label{font-size:11px;color:rgba(255,255,255,.3);text-align:right;line-height:1.5;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes scaleIn{from{opacity:0;transform:scale(1.06)}to{opacity:.75;transform:scale(1)}}
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+
+  @media(max-width:900px){
+    nav{padding:14px 20px;} .nav-links{display:none;}
+    .hero{grid-template-columns:1fr;} .hero-right{height:280px;} .hero-left{padding:90px 22px 50px;} .hero-info{grid-template-columns:1fr;}
+    section{padding:60px 22px;}
+    .intro,.proyecto,.s1-grid,.s2-compare,.s4-grid{grid-template-columns:1fr;gap:40px;}
+    .fun-grid,.s3-grid,.acts-grid,.refl-grid{grid-template-columns:1fr;gap:28px;}
+    footer{flex-direction:column;gap:22px;text-align:center;} .foot-right{justify-content:center;}
+    .proyecto-imgs img:first-child{height:200px;} .hero-hours .num{font-size:3.8rem;} .reflexion{padding:80px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><img src="img/logo.png" alt="La Pastoral"><span>E-Portafolio PASEC</span></a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#fundacion">Fundación</a></li>
+    <li><a href="#actividades">Actividades</a></li>
+    <li><a href="#s1">Producto</a></li>
+    <li><a href="#s2">Ciudadanía</a></li>
+    <li><a href="#s3">Valores</a></li>
+    <li><a href="#s4">Compromisos</a></li>
+    <li><a href="#referencias">Referencias</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="cross-deco">✝</div>
+    <div class="hero-tag"><span></span>Aprendizaje y Servicio &middot; PASEC &middot; NRC 1486</div>
+    <h1>Servir es<br><em>aprender</em><br>desde el alma.</h1>
+    <p class="hero-subtitle">Alisson Robles &middot; Código 00335727 &middot; USFQ &middot; Pastoral de Cumbayá</p>
+    <div class="hero-info">
+      <div class="info-card"><div class="label">Profesora</div><div class="value">Johanna Monar Coloma</div></div>
+      <div class="info-card"><div class="label">Fundación</div><div class="value">Pastoral Social de Cumbayá</div></div>
+      <div class="info-card"><div class="label">Carrera</div><div class="value">Comunicación · USFQ</div></div>
+      <div class="info-card"><div class="label">Frecuencia</div><div class="value">Cada 14 días · Sábados</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="img/alisson1.png" alt="Alisson Robles">
+    <div class="hero-hours"><div class="num">85</div><div class="unit">Horas de Servicio</div></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <div class="intro-img-wrap reveal"><img src="img/alisson2.png" alt="Alisson con adultos mayores"></div>
+  <div class="reveal" style="transition-delay:.15s">
+    <div class="section-label">Quién soy</div>
+    <h2>Una experiencia que<br>cambió mi perspectiva.</h2>
+    <div class="quote-block"><blockquote>"El servicio no es un requisito; es un encuentro con lo más humano que existe."</blockquote></div>
+    <p class="lead">Soy Alisson Robles, estudiante de <strong>Comunicación</strong> en la Universidad San Francisco de Quito. Durante este semestre fui parte de la clase de Aprendizaje y Servicio PASEC, una experiencia que me llevó mucho más allá de las aulas. Cada dos sábados me dirigí a la <strong>Fundación Pastoral Social de Cumbayá</strong>, donde compartí tiempo, actividades y momentos de genuina conexión humana con adultos mayores.</p>
+    <p class="lead" style="margin-top:16px;">Lo que comenzó como un compromiso académico se convirtió en algo que llevo en el corazón: la certeza de que dar sin esperar nada a cambio es uno de los actos más transformadores que existen.</p>
+  </div>
+</section>
+
+<!-- FUNDACIÓN -->
+<section class="fundacion" id="fundacion">
+  <div class="section-label" style="color:var(--gold)">La fundación</div>
+  <h2>Pastoral Social de Cumbayá</h2>
+  <p class="lead">Una comunidad de fe y servicio que abre sus puertas cada quince días para recibir a los adultos mayores de la zona, brindarles atención, actividades, compañía y víveres.</p>
+  <div class="fun-grid reveal">
+    <div>
+      <img class="fun-img" src="img/iglesia.png" alt="Iglesia Pastoral de Cumbayá">
+      <div class="fun-stats">
+        <div class="stat"><div class="n">85</div><div class="desc">Horas de servicio completadas en el semestre</div></div>
+        <div class="stat"><div class="n">2</div><div class="desc">Grupos atendidos: adultos mayores y niños</div></div>
+        <div class="stat"><div class="n">14</div><div class="desc">Días entre cada jornada de servicio</div></div>
+        <div class="stat"><div class="n">100%</div><div class="desc">Voluntariedad y consentimiento en cada actividad</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px;">
+      <p style="color:rgba(255,255,255,.7);line-height:1.82;font-size:1rem;">La Pastoral de Cumbayá funciona en torno a la iglesia local. Cada persona que asiste lleva una <strong style="color:var(--gold)">tarjeta de identificación personal</strong> que le permite acceder a su propia <strong style="color:var(--gold)">mochila andadora</strong> numerada con víveres donados.</p>
+      <p style="color:rgba(255,255,255,.7);line-height:1.82;font-size:1rem;">Yo siempre trabajé con el <strong style="color:var(--gold)">grupo de adultos mayores</strong>. Esa constancia me permitió construir vínculos reales, recordar sus historias, sus nombres, sus sonrisas. En cada jornada también se compartía un <strong style="color:var(--gold)">refrigerio</strong> con cada participante.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVIDADES -->
+<section class="actividades" id="actividades">
+  <div class="acts-intro reveal">
+    <div class="section-label">Lo que hicimos juntos</div>
+    <h2>Actividades que conectaron<br>corazones y manos.</h2>
+    <p class="lead">Cada sesión era diferente, pero todas tenían algo en común: el enfoque en la creatividad, la alegría y el bienestar de los adultos mayores.</p>
+  </div>
+  <div class="acts-grid">
+    <div class="act-card reveal"><img src="img/donaciones.png" alt="Donaciones"><div class="act-body"><span class="act-tag">Donaciones</span><h3>Preparación de Mochilas</h3><p>Organizábamos las mochilas andadoras con víveres para cada adulto mayor según su tarjeta identificadora. Uno de los momentos más emotivos de cada jornada.</p></div></div>
+    <div class="act-card reveal" style="transition-delay:.1s"><img src="img/cajas.png" alt="Cajas"><div class="act-body"><span class="act-tag">Manualidades</span><h3>Pintar Cajas de Cartón</h3><p>Los adultos mayores pintaron y decoraron cajas estimulando su motricidad fina y expresión artística. Cada persona le ponía su sello único y personal.</p></div></div>
+    <div class="act-card reveal" style="transition-delay:.2s"><img src="img/mascaras_hacer.png" alt="Máscaras"><div class="act-body"><span class="act-tag">Arte</span><h3>Elaboración de Máscaras</h3><p>Creamos máscaras decorativas con papel de colores y figuras de tela. Al final la sala estalló en risas cuando todos posaron con sus creaciones.</p></div></div>
+    <div class="act-card reveal" style="transition-delay:.3s"><img src="img/mascaras_show.png" alt="Exhibición"><div class="act-body"><span class="act-tag">Exposición</span><h3>Exhibición Artística</h3><p>Los participantes posaron orgullosos con sus obras. Un recordatorio poderoso de que la creatividad y el arte no tienen edad.</p></div></div>
+    <div class="act-card reveal" style="transition-delay:.4s"><img src="img/bingo.png" alt="Bingo"><div class="act-body"><span class="act-tag">Juegos</span><h3>Bingo con Botones</h3><p>En lugar de fichas usamos botones de distintos colores. Concentración, risas y competencia amistosa que ejercitaba la memoria.</p></div></div>
+    <div class="act-card reveal" style="transition-delay:.5s"><img src="img/alisson1.png" alt="Comunidad"><div class="act-body"><span class="act-tag">Comunidad</span><h3>El Refrigerio Compartido</h3><p>En cada jornada compartíamos un refrigerio. Ese momento alrededor de la mesa era quizás el más humano y genuino de todos.</p></div></div>
+  </div>
+</section>
+
+<!-- PROYECTO FINAL -->
+<section class="proyecto" id="proyecto">
+  <div class="reveal">
+    <div class="section-label">Proyecto Final</div>
+    <h2>Un día en la<br>Universidad San Francisco.</h2>
+    <p class="lead">El proyecto final del semestre fue el más significativo: llevamos a los adultos mayores en buses hasta el campus de la USFQ para vivir una tarde de cine juntos.</p>
+    <div class="highlight-box"><p><strong>Voluntariedad total:</strong> cada adulto mayor otorgó su consentimiento. Quienes no quisieron participar simplemente no fueron. Nadie fue presionado ni condicionado. El servicio sin dignidad no es servicio.</p></div>
+    <p class="lead">Para muchos fue la primera vez que visitaban una universidad. Caminar por el campus y sentarse juntos a ver una película fue el broche perfecto para un semestre de encuentros genuinos.</p>
+  </div>
+  <div class="proyecto-imgs reveal" style="transition-delay:.15s">
+    <img src="img/evento.png" alt="Evento en la USFQ">
+    <img src="img/alisson2.png" alt="Alisson con adultos mayores">
+    <img src="img/cajas.png" alt="Actividades">
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- S1: PRODUCTO MEJORADO -->
+<section class="s1" id="s1">
+  <div class="section-label">Sección 1 · E-Portafolio</div>
+  <h2>Producto Mejorado:<br>Conectar desde la diferencia.</h2>
+  <p class="lead">El aprendizaje que más me marcó no fue un texto ni una presentación — fue la capacidad de conectar genuinamente con personas que viven una realidad completamente distinta a la mía.</p>
+  <div class="s1-grid reveal">
+    <div class="s1-product-box">
+      <h3>El producto: una nueva forma de comunicar</h3>
+      <p>Como estudiante de Comunicación, siempre había pensado en la comunicación como un proceso técnico: mensajes, canales, audiencias. Pero en la Pastoral de Cumbayá entendí que comunicar es, antes que todo, un acto de presencia.</p>
+      <p>Mi producto mejorado es precisamente esa habilidad: la capacidad de leer un entorno nuevo, adaptar mi lenguaje, mi velocidad, mi actitud, y encontrar puntos de conexión reales con adultos mayores que viven en condiciones de vulnerabilidad.</p>
+      <p>Cada sábado fue un ejercicio de observación activa y comunicación no verbal. Aprendí a leer qué actividades generaban alegría, cuándo alguien necesitaba más apoyo, cómo una sonrisa podía romper barreras que ningún discurso podría.</p>
+      <p>Este producto mejorado es intangible pero profundamente real: la competencia comunicativa construida desde la empatía y el servicio directo con la comunidad.</p>
+    </div>
+    <div class="s1-questions">
+      <div class="s1-q">
+        <div class="q-label">¿Qué aprendí?</div>
+        <p>Aprendí que comunicar va más allá de las palabras. En cada jornada practiqué escucha activa, adaptación del lenguaje y lectura de contextos sociales. Aprendí a analizar una realidad distinta a la mía con ojos de comunicadora pero también de ser humano. Entendí que los mensajes más poderosos no siempre se dicen; se construyen en el silencio compartido, en la paciencia, en la presencia constante.</p>
+      </div>
+      <div class="s1-q">
+        <div class="q-label">¿Por qué fue relevante?</div>
+        <p>Fue relevante porque desafió mis esquemas previos. Yo estudiaba comunicación pensando en campañas, medios y plataformas digitales. El servicio me mostró que la comunicación más poderosa sucede entre dos personas, cara a cara, sin pantallas ni estrategias. Esa perspectiva amplió radicalmente mi visión de lo que significa ser comunicadora.</p>
+      </div>
+      <div class="s1-q">
+        <div class="q-label">¿Cómo me impactó?</div>
+        <p>A nivel personal, me confrontó con mis propios privilegios y me hizo más consciente de realidades que existen fuera de mi burbuja. A nivel profesional, entendí que como futura comunicadora tengo una responsabilidad con las comunidades vulnerables: no solo producir contenido, sino hacerlo con enfoque humano, respeto a la dignidad y conciencia del impacto social de cada mensaje que construya.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- S2: CIUDADANÍA RESPONSABLE -->
+<section class="s2" id="s2">
+  <div class="section-label" style="color:var(--gold)">Sección 2 · E-Portafolio</div>
+  <h2>Reflexión sobre<br>Ciudadanía Responsable</h2>
+  <p class="lead" style="color:rgba(255,255,255,.62)">De una definición teórica a una convicción vivida. Así evolucionó mi comprensión de lo que significa ser una ciudadana responsable.</p>
+
+  <div class="s2-def-box reveal">
+    <div class="def-label">Mi nueva definición · 2026</div>
+    <blockquote>"La ciudadanía responsable es la decisión consciente y sostenida de ver al otro — especialmente al más vulnerable — reconocer su dignidad y actuar en consecuencia. No es un conjunto de reglas que se cumplen, sino una forma de estar en el mundo que se construye en cada encuentro, en cada acto cotidiano, en cada momento en que elijo la empatía sobre la indiferencia."</blockquote>
+  </div>
+
+  <div class="s2-compare reveal">
+    <div class="s2-col">
+      <div class="col-header">
+        <div class="col-num">01</div>
+        <div class="col-title">Mi primera definición<br><span style="color:rgba(255,255,255,.35);font-size:11px">Antes del servicio · Deber</span></div>
+      </div>
+      <p>Definí la ciudadanía socialmente responsable como actuar de manera ética, solidaria y comprometida con el bienestar colectivo, respetando los derechos humanos, el medio ambiente y las normas de convivencia, según la Constitución del Ecuador y marcos de la UNESCO.</p>
+      <p>Mi enfoque era principalmente ambiental y normativo: reciclar, ahorrar agua, respetar espacios públicos, votar informadamente. Entendía que no solo hay que exigir derechos sino también cumplir responsabilidades, pero lo veía de forma abstracta.</p>
+      <p>Era una definición informada y válida, pero construida desde el escritorio, no desde la experiencia directa con la comunidad.</p>
+    </div>
+    <div class="s2-col">
+      <div class="col-header">
+        <div class="col-num">02</div>
+        <div class="col-title">Mi nueva definición<br><span style="color:rgba(255,255,255,.35);font-size:11px">Después del servicio · E-Portafolio</span></div>
+      </div>
+      <p>Hoy entiendo la ciudadanía responsable como algo profundamente relacional: no se trata solo de cumplir normas o cuidar el ambiente, sino de ver al otro, reconocer su dignidad y actuar en consecuencia, especialmente con quienes son invisibilizados.</p>
+      <p>El servicio en la Pastoral me mostró que ser ciudadana responsable también significa estar presente de manera real en la vida de mi comunidad. Significa que mi carrera de Comunicación tiene una deuda con esas voces que raramente son escuchadas.</p>
+      <p>Es una definición que ya no vive solo en un documento, sino en mi forma de ver el mundo y de tomar decisiones.</p>
+    </div>
+  </div>
+
+  <div class="s2-compare-text reveal">
+    <h3>¿Qué cambió, qué se mantuvo y por qué?</h3>
+    <p><strong>Lo que cambió:</strong> antes veía la ciudadanía responsable como un conjunto de acciones individuales vinculadas principalmente al ambiente y al respeto de normas. Después del servicio, entiendo que su núcleo es la relación con el otro, especialmente con el más vulnerable. El cambio fue pasar de una ciudadanía de reglas a una ciudadanía de vínculos.</p>
+    <p><strong>Por qué cambió:</strong> porque la experiencia concreta supera cualquier marco teórico. Cada sábado en la Pastoral yo no estaba aplicando definiciones, estaba construyendo relaciones. Y en esas relaciones entendí que la responsabilidad ciudadana es, ante todo, la responsabilidad de ver al otro como un igual en dignidad.</p>
+    <p><strong>Lo que se mantuvo:</strong> se mantuvo la convicción de que cada acción individual tiene consecuencias colectivas, y que no debemos esperar únicamente que el gobierno resuelva los problemas sociales. Eso lo pensaba antes y lo sigo pensando, pero ahora lo entiendo de manera mucho más encarnada y urgente.</p>
+    <p><strong>Por qué se mantuvo:</strong> porque esa idea es estructuralmente correcta y el servicio la confirmó. Vi con mis propios ojos cómo la acción voluntaria y constante de un grupo de jóvenes transforma concretamente la vida de personas mayores cada quince días. La acción individual sí importa, y mucho.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- S3: VALORES -->
+<section class="s3" id="s3">
+  <div class="section-label">Sección 3 · E-Portafolio</div>
+  <h2>Tres valores esenciales que<br>guían mi acción ciudadana.</h2>
+  <p class="lead">Estos valores no son principios que solo declaro — son convicciones que se forjaron o se profundizaron durante las 85 horas de servicio en la Pastoral de Cumbayá.</p>
+  <div class="s3-grid reveal">
+    <div class="valor-card">
+      <div class="valor-header"><div class="valor-num">01</div><h3>Empatía</h3></div>
+      <div class="valor-body">
+        <div class="valor-item"><div class="vi-label">¿Por qué es importante?</div><p>La empatía es el punto de partida de cualquier acción ciudadana genuina. Sin ella, el servicio se convierte en una transacción. Con ella, se convierte en un encuentro real. Como futura comunicadora, la empatía me permite construir mensajes que realmente llegan a las personas porque parten de entender su realidad.</p></div>
+        <div class="valor-item"><div class="vi-label">¿Cómo lo apliqué?</div><p>Lo apliqué cada sábado al adaptar mi forma de comunicarme con cada adulto mayor: a sus ritmos, sus capacidades, sus historias. Cuando alguien no quería participar en una actividad, lo respetaba y buscaba otra forma de acompañarle. La empatía fue mi herramienta principal de trabajo durante todo el semestre.</p></div>
+      </div>
+    </div>
+    <div class="valor-card">
+      <div class="valor-header"><div class="valor-num">02</div><h3>Respeto a la dignidad</h3></div>
+      <div class="valor-body">
+        <div class="valor-item"><div class="vi-label">¿Por qué es importante?</div><p>El respeto a la dignidad humana es el fundamento de toda relación ética, especialmente con poblaciones vulnerables. En ciudadanía responsable, no basta con "ayudar": hay que hacerlo de manera que preserve y refuerce la dignidad de quien recibe el apoyo, no que la erosione o minimice.</p></div>
+        <div class="valor-item"><div class="vi-label">¿Cómo lo apliqué?</div><p>Lo apliqué en el proyecto final, al garantizar que la visita a la USFQ fuera 100% voluntaria. Nadie fue presionado. También lo apliqué en las actividades diarias: nunca traté a los adultos mayores como receptores pasivos, sino como participantes activos, creativos y con voz propia.</p></div>
+      </div>
+    </div>
+    <div class="valor-card">
+      <div class="valor-header"><div class="valor-num">03</div><h3>Compromiso sostenido</h3></div>
+      <div class="valor-body">
+        <div class="valor-item"><div class="vi-label">¿Por qué es importante?</div><p>La ciudadanía responsable no es un acto puntual sino una práctica continua. El compromiso sostenido es lo que transforma una buena intención en un impacto real. La constancia genera confianza y permite construir relaciones genuinas que van más allá del voluntariado ocasional.</p></div>
+        <div class="valor-item"><div class="vi-label">¿Cómo lo apliqué?</div><p>Asistí a todas las jornadas del semestre sin faltar. Con el tiempo, los adultos mayores me reconocían, me saludaban por mi nombre y se sentían cómodos conmigo. Esa familiaridad solo fue posible por la constancia. Presentarse siempre es, en sí mismo, una forma poderosa de demostrar respeto.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- S4: COMPROMISOS -->
+<section class="s4" id="s4">
+  <div class="section-label">Sección 4 · E-Portafolio</div>
+  <h2>Dos compromisos personales<br>que asumo desde hoy.</h2>
+  <p class="lead">Estos compromisos nacen directamente de lo vivido en la Pastoral de Cumbayá. Son específicos, medibles y están anclados en mi realidad como estudiante de Comunicación y futura profesional.</p>
+  <div class="s4-grid reveal">
+    <div class="compromiso-card">
+      <div class="comp-header est">
+        <div class="comp-role">Como estudiante</div>
+        <h3>Incluir perspectivas de poblaciones vulnerables en mis proyectos académicos de comunicación</h3>
+      </div>
+      <div class="comp-body">
+        <div>
+          <div class="comp-stitle">Indicadores de cumplimiento</div>
+          <p>Al menos uno de mis proyectos por semestre incorporará investigación directa con una comunidad vulnerable. Mantendré un registro de las voces y fuentes que incluyo en mis trabajos para verificar diversidad de perspectivas.</p>
+        </div>
+        <div>
+          <div class="comp-stitle">Acciones concretas</div>
+          <ul class="acc-list">
+            <li>Proponer en al menos un trabajo por semestre un enfoque que incluya entrevistas o testimonios de adultos mayores u otras comunidades subrepresentadas.</li>
+            <li>Buscar pasantías o proyectos universitarios vinculados a comunicación social y organizaciones sin fines de lucro.</li>
+            <li>Compartir con mis compañeros de carrera lo aprendido en PASEC para generar conversación sobre comunicación con enfoque social.</li>
+            <li>Llevar un diario de reflexión sobre cómo mis decisiones académicas impactan o podrían impactar a comunidades reales.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="compromiso-card">
+      <div class="comp-header pro">
+        <div class="comp-role">Como futura profesional</div>
+        <h3>Ejercer la comunicación con enfoque en dignidad humana y responsabilidad social</h3>
+      </div>
+      <div class="comp-body">
+        <div>
+          <div class="comp-stitle">Indicadores de cumplimiento</div>
+          <p>Evaluaré cada proyecto profesional con una pregunta clave: ¿este trabajo respeta y visibiliza la dignidad de las personas que representa? Priorizaré trabajar con organizaciones cuyo impacto social sea positivo y medible.</p>
+        </div>
+        <div>
+          <div class="comp-stitle">Acciones concretas</div>
+          <ul class="acc-list">
+            <li>Dedicar al menos el 10% de mi tiempo profesional a proyectos de comunicación pro bono para organizaciones sociales, especialmente relacionadas con adultos mayores.</li>
+            <li>Incluir en mi portafolio profesional una sección de "comunicación con impacto social" que refleje este compromiso de manera concreta.</li>
+            <li>Mantener contacto con la Fundación Pastoral de Cumbayá para ofrecer apoyo en comunicación digital y difusión de su trabajo.</li>
+            <li>Rechazar proyectos que atenten contra la dignidad de personas o comunidades, independientemente del beneficio económico que representen.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLEXIÓN FINAL -->
+<section class="reflexion" id="reflexion">
+  <div class="reflexion-body">
+    <div class="section-label" style="color:var(--gold);justify-content:center;margin:0 auto 18px">Reflexión Final</div>
+    <h2 style="margin-bottom:40px;color:var(--white)">Lo que 85 horas me<br>enseñaron sobre la vida.</h2>
+    <p>Este semestre me hizo entender que la <strong>vulnerabilidad compartida</strong> es la base de toda conexión humana verdadera. Cada sábado que llegué a la Pastoral llegué con mis propios miedos y dudas, y los adultos mayores me recibieron con una calidez que no pedí pero que necesitaba.</p>
+    <p>Aprendí que el tiempo es el regalo más valioso. No los víveres, no las actividades planificadas, sino <strong>estar presente de verdad</strong>. Mirar a alguien a los ojos, recordar su nombre, preguntarle cómo está.</p>
+    <p>Como estudiante de Comunicación, salgo con una convicción clara: <strong>mi carrera tiene una responsabilidad social</strong>. Las historias que elija contar, las voces que decida amplificar, los mensajes que construya — todo tiene consecuencias reales en vidas reales. Y ese compromiso es exactamente lo que la PASEC quiere dejar en cada uno de nosotros.</p>
+    <div class="refl-grid reveal">
+      <div class="refl-card"><div class="icon">🤲</div><h4>Empatía Profunda</h4><p>Ponerse en el lugar del otro es una práctica cotidiana que se cultiva con presencia genuina y escucha activa, no un ejercicio intelectual.</p></div>
+      <div class="refl-card"><div class="icon">🌱</div><h4>Crecimiento Personal</h4><p>Cada sesión me desafió a salir de mi zona de confort y a encontrar significado profundo en los momentos más pequeños y sencillos.</p></div>
+      <div class="refl-card"><div class="icon">✨</div><h4>Responsabilidad Social</h4><p>El conocimiento académico adquiere otro sentido cuando se pone al servicio de la comunidad. Eso es exactamente lo que PASEC me regaló.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCIAS -->
+<section class="s5" id="referencias">
+  <div class="section-label" style="color:var(--gold)">Sección 5 · E-Portafolio</div>
+  <h2>Referencias Bibliográficas</h2>
+  <div class="ref-list reveal">
+    <div class="ref-item"><p>Asamblea Constituyente del Ecuador. (2008). <em>Constitución de la República del Ecuador</em>. Gobierno del Ecuador. <a href="https://www.cancilleria.gob.ec/wp-content/uploads/downloads/2013/02/constitucion.pdf" target="_blank">https://www.cancilleria.gob.ec/wp-content/uploads/downloads/2013/02/constitucion.pdf</a></p></div>
+    <div class="ref-item"><p>Organización de las Naciones Unidas para la Educación, la Ciencia y la Cultura (UNESCO). (2026). <em>Educación para la ciudadanía mundial y la paz</em>. UNESCO. <a href="https://www.unesco.org/es/global-citizenship-peace-education" target="_blank">https://www.unesco.org/es/global-citizenship-peace-education</a></p></div>
+    <div class="ref-item"><p>Organización de las Naciones Unidas para la Educación, la Ciencia y la Cultura (UNESCO). (2026). <em>Lo que hay que saber sobre la educación para la ciudadanía mundial</em>. UNESCO.</p></div>
+    <div class="ref-item"><p>Organización Mundial de la Propiedad Intelectual (OMPI). (2008). <em>Constitución de la República del Ecuador</em>. WIPO Lex.</p></div>
+    <div class="ref-item"><p>Instituto de la UNESCO para el Aprendizaje a lo Largo de Toda la Vida. (2025). <em>Educación para la ciudadanía mundial</em>. UNESCO.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-name">Alisson Robles &middot; 00335727</div>
+    <div class="foot-sub">PASEC &middot; NRC 1486 &middot; Prof. Johanna Monar Coloma</div>
+    <div class="foot-sub">Universidad San Francisco de Quito &middot; 2026</div>
+  </div>
+  <div class="foot-right">
+    <div class="usfq-label">Fundación Pastoral<br>Social de Cumbayá</div>
+    <img src="img/logo.png" alt="Logo La Pastoral">
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
